@@ -295,7 +295,7 @@ VALUES
 
 INSERT INTO public."MedicalRecord" ("PatientID", "StartDate", "EndDate", "Diagnosis", "Note", "Treatment")
 VALUES
---(5, CURRENT_DATE - INTERVAL '1 month', CURRENT_DATE - INTERVAL '1 month', 'Hypertension', 'High blood pressure due to poor diet and lack of exercise.', 'Prescription medication, dietary changes, and regular exercise.'),
+(5, CURRENT_DATE - INTERVAL '1 month', CURRENT_DATE - INTERVAL '1 month', 'Hypertension', 'High blood pressure due to poor diet and lack of exercise.', 'Prescription medication, dietary changes, and regular exercise.'),
 (6, CURRENT_DATE - INTERVAL '2 months', CURRENT_DATE - INTERVAL '2 months', 'Type 2 Diabetes', 'Diabetes caused by obesity and unhealthy eating habits.', 'Insulin therapy, blood sugar monitoring, and lifestyle modifications.'),
 (7, CURRENT_DATE - INTERVAL '3 months', CURRENT_DATE - INTERVAL '3 months', 'Migraine', 'Frequent migraines triggered by stress and lack of sleep.', 'Prescription medication, stress management techniques, and adequate sleep.'),
 (8, CURRENT_DATE - INTERVAL '4 months', CURRENT_DATE - INTERVAL '4 months', 'Asthma', 'Chronic asthma exacerbated by environmental allergens.', 'Bronchodilators, corticosteroids, and avoiding triggers.'),
