@@ -1,4 +1,5 @@
 using BlazorWasm.HospitalManagementSystem;
+using BlazorWasm.HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -9,6 +10,9 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddFluentUIComponents();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+string backendUrl = "https://hospital-management-system-backend-7fee.vercel.app/api/v1";
+
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(backendUrl) });
+builder.Services.AddSingleton<HttpClientService>();
 
 await builder.Build().RunAsync();
