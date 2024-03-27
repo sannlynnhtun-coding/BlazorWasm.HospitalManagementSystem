@@ -1,14 +1,15 @@
 ﻿using BlazorWasm.HospitalManagementSystem.Models;
+using BlazorWasm.HospitalManagementSystem.Pages.Disease;
 using BlazorWasm.HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 
-namespace BlazorWasm.HospitalManagementSystem.Pages.Disease;
+namespace BlazorWasm.HospitalManagementSystem.Pages.Room;
 
-public partial class PageDisease : ComponentBase
+public partial class PageRoom : ComponentBase
 {
-    private IQueryable<DiseaseModel>? Data;
-    private DiseaseModel Item = new();
+    private IQueryable<RoomModel>? Data;
+    private RoomModel Item = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -18,14 +19,14 @@ public partial class PageDisease : ComponentBase
     private async Task List()
     {
         Loading.EnableLoading();
-        var lst = await ApiService.Execute<List<DiseaseModel>>(ApiUrl.Diseases, Method.Get);
+        var lst = await ApiService.Execute<List<RoomModel>>(ApiUrl.Rooms, Method.Get);
         Data = lst.OrderByDescending(x => x.id).AsQueryable();
         Loading.DisableLoading();
     }
 
     private async Task Create()
     {
-        var dialog = await DialogService.ShowDialogAsync<PageDiseaseDialog>(Item, new DialogParameters()
+        var dialog = await DialogService.ShowDialogAsync<PageRoomDialog>(Item, new DialogParameters()
         {
             PreventDismissOnOverlayClick = true,
             PreventScroll = true,
@@ -35,15 +36,15 @@ public partial class PageDisease : ComponentBase
         if (!result.Cancelled && result.Data != null)
         {
             Loading.EnableLoading();
-            await ApiService.Execute(ApiUrl.Diseases, Method.Post, result.Data);
+            await ApiService.Execute(ApiUrl.Rooms, Method.Post, result.Data);
             Item = new();
             await List();
         }
     }
 
-    private async Task Edit(DiseaseModel item)
+    private async Task Edit(RoomModel disease)
     {
-        var dialog = await DialogService.ShowDialogAsync<PageDiseaseDialog>(item, new DialogParameters()
+        var dialog = await DialogService.ShowDialogAsync<PageRoomDialog>(disease, new DialogParameters()
         {
             PreventDismissOnOverlayClick = true,
             PreventScroll = true,
@@ -53,13 +54,13 @@ public partial class PageDisease : ComponentBase
         if (!result.Cancelled && result.Data != null)
         {
             Loading.EnableLoading();
-            await ApiService.Execute($"{ApiUrl.Diseases}/{item.id}", Method.Put, result.Data);
+            await ApiService.Execute($"{ApiUrl.Rooms}/{disease.id}", Method.Put, result.Data);
             Item = new();
             await List();
         }
     }
 
-    private async Task Delete(DiseaseModel item)
+    private async Task Delete(RoomModel disease)
     {
         var dialog = await DialogService.ShowConfirmationAsync("Are you sure want to delete?", "Yes", "No", "Confirm");
         var result = await dialog.Result;
@@ -67,7 +68,7 @@ public partial class PageDisease : ComponentBase
         if (canceled) return;
 
         Loading.EnableLoading();
-        await ApiService.Execute($"{ApiUrl.Diseases}/{item.id}", Method.Delete);
+        await ApiService.Execute($"{ApiUrl.Rooms}/{disease.id}", Method.Delete);
         Item = new();
         await List();
     }

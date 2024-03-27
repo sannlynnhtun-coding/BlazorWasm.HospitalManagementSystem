@@ -3,4 +3,5 @@
 public static class ApiUrl
 {
     public static string Diseases { get; } = "Diseases";
+    public static string Rooms { get; } = "Rooms";
 }

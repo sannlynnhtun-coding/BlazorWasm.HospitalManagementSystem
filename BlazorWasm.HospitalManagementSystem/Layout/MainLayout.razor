@@ -2,20 +2,23 @@
 @implements IDisposable
 
 <FluentHeader Height="60">
-    <FluentLabel Typo="Typography.H4" Class="">
-        <span style="color:white;margin-right: 15px;">Hospital Management System</span>
-    </FluentLabel>
     <FluentButton Color="Color.Custom" OnClick="() => { Expanded = !Expanded; }" CustomColor="#fff" IconStart="@(new Icons.Regular.Size24.Navigation())">
     </FluentButton>
+    <FluentLabel Typo="Typography.H4" Class="">
+        <span style="color:white;margin-left: 15px;">Hospital Management System</span>
+    </FluentLabel>
     <FluentSpacer />
 </FluentHeader>
 <FluentStack Orientation="Orientation.Horizontal" Width="100%">
-    <FluentNavMenu @bind-Expanded="@Expanded" Width="300" Title="Collapsible demo">
-        <FluentNavGroup Expanded="true" Title="General Setup" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
+    @if (Expanded)
+    {
+        <FluentNavMenu @bind-Expanded="@Expanded" Width="300">
+            <FluentNavGroup Expanded="true" Title="General Setup" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
             <FluentNavLink Href="disease" Icon="@(new Icons.Regular.Size24.LeafOne())">Disese</FluentNavLink>
             <FluentNavLink Href="room" Icon="@(new Icons.Regular.Size24.LeafOne())">Room</FluentNavLink>
         </FluentNavGroup>
     </FluentNavMenu>
+    }
     <FluentBodyContent Style="padding: 20px;">
         @Body
     </FluentBodyContent>
@@ -37,14 +40,14 @@
 {
     bool Expanded = true;
 
-protected override void OnInitialized()
-{
-    Loading.OnChange += StateHasChanged;
-}
+    protected override void OnInitialized()
+    {
+        Loading.OnChange += StateHasChanged;
+    }
 
-public void Dispose()
-{
-    Loading.OnChange -= StateHasChanged;
-}
+    public void Dispose()
+    {
+        Loading.OnChange -= StateHasChanged;
+    }
 }
 

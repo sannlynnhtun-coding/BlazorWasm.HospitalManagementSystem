@@ -1,5 +1,22 @@
-﻿<h3>PageRoom</h3>
+﻿@page "/room"
 
-@code {
-
+<FluentButton OnClick="Create">
+    New
+</FluentButton>
+@if (Data is not null)
+{
+    <FluentDataGrid Items="@Data">
+        <TemplateColumn>
+            <FluentButton IconStart="@(new Icons.Regular.Size24.Edit().WithColor(Color.Warning))" OnClick="() => Edit(context)">
+                Edit
+            </FluentButton>
+            <FluentButton IconStart="@(new Icons.Regular.Size24.Delete().WithColor(Color.Error))" OnClick="() => Delete(context)">
+                Delete
+            </FluentButton>
+        </TemplateColumn>
+        <TemplateColumn Title="No.">
+            @(Data.Get(context))
+        </TemplateColumn>
+        <PropertyColumn Property="@(p => p.name)" Sortable="true" />
+    </FluentDataGrid>
 }
