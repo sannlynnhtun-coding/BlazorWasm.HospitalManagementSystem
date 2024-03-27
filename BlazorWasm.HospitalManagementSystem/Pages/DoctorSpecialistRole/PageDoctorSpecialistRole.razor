@@ -1,4 +1,4 @@
-﻿@page "/disease"
+﻿@page "/doctor-specialist-role"
 
 <FluentButton OnClick="Create">
     New
@@ -17,6 +17,7 @@
         <TemplateColumn Title="No.">
             @(Data.Get(context))
         </TemplateColumn>
-        <PropertyColumn Property="@(p => p.name)" Title="Name" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Name)" Title="Name" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Description)" Title="Description" Sortable="true" />
     </FluentDataGrid>
 }

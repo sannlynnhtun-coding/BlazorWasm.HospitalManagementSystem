@@ -14,10 +14,11 @@
     {
         <FluentNavMenu @bind-Expanded="@Expanded" Width="300">
             <FluentNavGroup Expanded="true" Title="General Setup" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
-            <FluentNavLink Href="disease" Icon="@(new Icons.Regular.Size24.LeafOne())">Disese</FluentNavLink>
-            <FluentNavLink Href="room" Icon="@(new Icons.Regular.Size24.LeafOne())">Room</FluentNavLink>
-        </FluentNavGroup>
-    </FluentNavMenu>
+                <FluentNavLink Href="disease" Icon="@(new Icons.Regular.Size24.LeafOne())">Disese</FluentNavLink>
+                <FluentNavLink Href="room" Icon="@(new Icons.Regular.Size24.LeafOne())">Room</FluentNavLink>
+                <FluentNavLink Href="doctor-specialist-role" Icon="@(new Icons.Regular.Size24.LeafOne())">Doctor Specialist Role</FluentNavLink>
+            </FluentNavGroup>
+        </FluentNavMenu>
     }
     <FluentBodyContent Style="padding: 20px;">
         @Body
