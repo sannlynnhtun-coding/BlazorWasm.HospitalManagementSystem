@@ -14,6 +14,6 @@ string backendUrl = "https://hospital-management-system-backend-7fee.vercel.app/
 
 builder.Services.AddSingleton<Loading>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(backendUrl) });
-builder.Services.AddScoped<HttpClientService>();
+builder.Services.AddScoped<IApiService, HttpClientService>();
 
 await builder.Build().RunAsync();

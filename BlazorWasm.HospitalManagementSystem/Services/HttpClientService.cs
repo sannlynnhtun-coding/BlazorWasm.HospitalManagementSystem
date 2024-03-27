@@ -7,7 +7,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace BlazorWasm.HospitalManagementSystem.Services;
 
-public class HttpClientService
+public class HttpClientService : IApiService
 {
     private readonly HttpClient _httpClient;
 

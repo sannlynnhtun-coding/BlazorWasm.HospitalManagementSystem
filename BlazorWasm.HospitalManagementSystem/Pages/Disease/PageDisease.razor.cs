@@ -18,7 +18,7 @@ public partial class PageDisease : ComponentBase
     private async Task List()
     {
         Loading.EnableLoading();
-        var lst = await HttpClientService.Execute<List<DiseaseModel>>(ApiUrl.Diseases, Method.Get);
+        var lst = await ApiService.Execute<List<DiseaseModel>>(ApiUrl.Diseases, Method.Get);
         Data = lst.OrderByDescending(x => x.id).AsQueryable();
         Loading.DisableLoading();
     }
@@ -35,7 +35,7 @@ public partial class PageDisease : ComponentBase
         if (!result.Cancelled && result.Data != null)
         {
             Loading.EnableLoading();
-            await HttpClientService.Execute(ApiUrl.Diseases, Method.Post, result.Data);
+            await ApiService.Execute(ApiUrl.Diseases, Method.Post, result.Data);
             Item = new();
             await List();
         }
@@ -53,7 +53,7 @@ public partial class PageDisease : ComponentBase
         if (!result.Cancelled && result.Data != null)
         {
             Loading.EnableLoading();
-            await HttpClientService.Execute($"{ApiUrl.Diseases}/{disease.id}", Method.Put, result.Data);
+            await ApiService.Execute($"{ApiUrl.Diseases}/{disease.id}", Method.Put, result.Data);
             Item = new();
             await List();
         }
@@ -67,7 +67,7 @@ public partial class PageDisease : ComponentBase
         if (canceled) return;
 
         Loading.EnableLoading();
-        await HttpClientService.Execute($"{ApiUrl.Diseases}/{disease.id}", Method.Delete);
+        await ApiService.Execute($"{ApiUrl.Diseases}/{disease.id}", Method.Delete);
         Item = new();
         await List();
     }
