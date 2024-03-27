@@ -17,6 +17,6 @@
         <TemplateColumn Title="No.">
             @(Data.Get(context))
         </TemplateColumn>
-        <PropertyColumn Property="@(p => p.name)" Sortable="true" />
+        <PropertyColumn Property="@(p => p.name)" Title="Name" Sortable="true" />
     </FluentDataGrid>
 }
