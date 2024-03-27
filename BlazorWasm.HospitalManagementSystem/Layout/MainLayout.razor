@@ -1,16 +1,31 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<FluentHeader Height="60">
+    <FluentLabel Typo="Typography.H4" Class="">
+        <span style="color:white;margin-right: 15px;">Hospital Management System</span>
+    </FluentLabel>
+    <FluentButton Color="Color.Custom" OnClick="() => { Expanded = !Expanded; }" CustomColor="#fff" IconStart="@(new Icons.Regular.Size24.Navigation())">
+    </FluentButton>
+    <FluentSpacer />
+</FluentHeader>
+<FluentStack Orientation="Orientation.Horizontal" Width="100%">
+    <FluentNavMenu @bind-Expanded="@Expanded" Width="300" Title="Collapsible demo">
+        <FluentNavLink Icon="@(new Icons.Regular.Size24.Home())" Tooltip="Item 1 tooltip">Item 1</FluentNavLink>
+        <FluentNavLink Icon="@(new Icons.Regular.Size24.Cloud())" Tooltip="Item 2 tooltip">Item 2</FluentNavLink>
+        <FluentNavGroup Title="Item 3" Tooltip="Item 3 tooltip" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
+            <FluentNavLink Icon="@(new Icons.Regular.Size24.LeafOne())" Tooltip="Item 3.1 tooltip">Item 3.1</FluentNavLink>
+            <FluentNavLink Icon="@(new Icons.Regular.Size24.LeafTwo())" Tooltip="Item 3.2 tooltip">Item 3.2</FluentNavLink>
+        </FluentNavGroup>
+    </FluentNavMenu>
+    <FluentBodyContent>
+        @Body
+    </FluentBodyContent>
+</FluentStack>
+<FluentToastProvider />
+<FluentDialogProvider />
+<FluentTooltipProvider />
+<FluentMessageBarProvider />
+@code
+{
+    bool Expanded = true;
+}
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
