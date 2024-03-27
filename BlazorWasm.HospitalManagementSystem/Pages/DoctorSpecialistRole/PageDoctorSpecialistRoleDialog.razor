@@ -15,8 +15,8 @@
 </FluentDialogFooter>
 
 <FluentDialogBody>
-    <FluentTextField @bind-Value="@Content.Name">Name:</FluentTextField>
-    <FluentTextField @bind-Value="@Content.Description">Description:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Name" style="width: 100%;">Name:</FluentTextField>
+    <FluentTextArea @bind-Value="@Content.Description" style="width: 100%;">Description:</FluentTextArea>
 </FluentDialogBody>
 
 @code {
