@@ -10,9 +10,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddFluentUIComponents();
 
-string backendUrl = "https://hospital-management-system-backend-7fee.vercel.app/api/v1";
+string backendUrl = "https://hospital-management-system-backend-7fee.vercel.app/api/v1/";
 
+builder.Services.AddSingleton<Loading>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(backendUrl) });
-builder.Services.AddSingleton<HttpClientService>();
+builder.Services.AddScoped<HttpClientService>();
 
 await builder.Build().RunAsync();
