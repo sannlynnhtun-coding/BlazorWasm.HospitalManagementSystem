@@ -1,9 +1,4 @@
-﻿using BlazorWasm.HospitalManagementSystem.Models;
-using BlazorWasm.HospitalManagementSystem.Services;
-using Microsoft.AspNetCore.Components;
-using Microsoft.FluentUI.AspNetCore.Components;
-
-namespace BlazorWasm.HospitalManagementSystem.Pages.Room;
+﻿namespace BlazorWasm.HospitalManagementSystem.Pages.Room;
 
 public partial class PageRoom : ComponentBase
 {
