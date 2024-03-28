@@ -1,0 +1,67 @@
+﻿@implements IDialogContentComponent<DoctorCreateModel>
+
+<FluentDialogHeader ShowDismiss="true">
+    <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentIcon Value="@(new Icons.Regular.Size24.WindowApps())" />
+        <FluentLabel Typo="Typography.PaneHeader">
+            Doctor
+        </FluentLabel>
+    </FluentStack>
+</FluentDialogHeader>
+
+<FluentDialogFooter>
+    <FluentButton Appearance="Appearance.Accent" OnClick="@SaveAsync">Save</FluentButton>
+    <FluentButton Appearance="Appearance.Neutral" OnClick="@CancelAsync">Cancel</FluentButton>
+</FluentDialogFooter>
+
+<FluentDialogBody>
+    @if (DataLst is not null)
+    {
+        <FluentTextField @bind-Value="@Content.DoctorName" style="width: 100%;">Name:</FluentTextField>
+        <FluentSelect ValueChanged="@(e => Content.SpecialistId = Convert.ToInt32(e))"
+                      Label="Select Specialist"
+                      TOption="int" style="width: 100%;">
+            <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
+            @foreach (var item in DataLst)
+            {
+                <FluentOption Value="@(item.Id.ToString())">@item.Name</FluentOption>
+            }
+        </FluentSelect>
+        <FluentTextField @bind-Value="@Content.Email" style="width: 100%;">Email:</FluentTextField>
+        <FluentTextField @bind-Value="@Content.MobileNumber" style="width: 100%;">Phone:</FluentTextField>
+        <FluentTextField @bind-Value="@Content.StartDuty" style="width: 100%;">Start Time:</FluentTextField>
+        <FluentTextField @bind-Value="@Content.EndDuty" style="width: 100%;">End Time:</FluentTextField>
+    }
+</FluentDialogBody>
+
+@code {
+    [Parameter]
+    public DoctorCreateModel Content { get; set; } = default!;
+
+    [CascadingParameter]
+    public FluentDialog Dialog { get; set; } = default!;
+
+    private List<DoctorSpecialistModel> DataLst = null;
+
+    // string? SpecialistId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        DataLst = await ApiService.Execute<List<DoctorSpecialistModel>>(ApiUrl.DoctorSpecialists, Method.Get);
+        DataLst.Insert(0, new DoctorSpecialistModel
+            {
+                Id = 0,
+                Name = "-- Select One --"
+            });
+    }
+
+    private async Task SaveAsync()
+    {
+        await Dialog.CloseAsync(Content);
+    }
+
+    private async Task CancelAsync()
+    {
+        await Dialog.CancelAsync();
+    }
+}

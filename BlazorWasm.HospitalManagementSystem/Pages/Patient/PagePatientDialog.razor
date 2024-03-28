@@ -21,7 +21,7 @@
     <FluentTextField @bind-Value="@Content.email" style="width: 100%;">Email:</FluentTextField>
     <FluentTextField @bind-Value="@Content.bloodType" style="width: 100%;">BloodType:</FluentTextField>
     <FluentTextField @bind-Value="@Content.address" style="width: 100%;">Address:</FluentTextField>
-    <FluentDatePicker AriaLabel="Date Of Birth" @bind-Value="@SelectedDate" />
+    <FluentDatePicker AriaLabel="Date Of Birth" @bind-Value="@SelectedDate" DayFormat="DayFormat.TwoDigit"/>
 </FluentDialogBody>
 
 @code {

@@ -9,4 +9,6 @@ public static class ApiUrl
     public static string DoctorSpecialistRoleEdit { get; } = "doctor-specialist/edit";
     public static string DoctorSpecialistRoleDelete { get; } = "doctor-specialist/delete";
     public static string Patient { get; } = "patients";
+    public static string Doctor { get; } = "doctors";
+    public static string DoctorSpecialists { get; } = "doctor-specialists";
 }

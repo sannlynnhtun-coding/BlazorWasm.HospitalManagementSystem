@@ -12,12 +12,30 @@
 <FluentStack Orientation="Orientation.Horizontal" Width="100%">
     @if (Expanded)
     {
-        <FluentNavMenu @bind-Expanded="@Expanded" Width="300">
+        @* <FluentNavMenu @bind-Expanded="@Expanded" Width="300">
             <FluentNavGroup Expanded="true" Title="General Setup" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
                 <FluentNavLink Href="disease" Icon="@(new Icons.Regular.Size24.LeafOne())">Disease</FluentNavLink>
                 <FluentNavLink Href="room" Icon="@(new Icons.Regular.Size24.LeafOne())">Room</FluentNavLink>
                 <FluentNavLink Href="doctor-specialist-role" Icon="@(new Icons.Regular.Size24.LeafOne())">Doctor Specialist Role</FluentNavLink>
                 <FluentNavLink Href="patient" Icon="@(new Icons.Regular.Size24.LeafOne())">Patient</FluentNavLink>
+            </FluentNavGroup>
+        </FluentNavMenu> *@
+        <FluentNavMenu @bind-Expanded="@Expanded" Width="300">
+            <FluentNavGroup Expanded="true" Title="Doctor" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
+                <FluentNavLink Href="" Icon="@(new Icons.Regular.Size24.LeafOne())">Doctor List</FluentNavLink>
+                <FluentNavLink Href="doctor" Icon="@(new Icons.Regular.Size24.LeafOne())">Manage</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Expanded="true" Title="Patient" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
+                <FluentNavLink Href="patient" Icon="@(new Icons.Regular.Size24.LeafOne())">Patient List</FluentNavLink>
+                <FluentNavLink Href="" Icon="@(new Icons.Regular.Size24.LeafOne())">Medical Record</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Expanded="true" Title="Appointment" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
+                <FluentNavLink Href="" Icon="@(new Icons.Regular.Size24.LeafOne())">Appointment List</FluentNavLink>
+                <FluentNavLink Href="" Icon="@(new Icons.Regular.Size24.LeafOne())">New Appointment</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Expanded="true" Title="General Setup" Icon="@(new Icons.Regular.Size24.EarthLeaf())">
+                <FluentNavLink Href="disease" Icon="@(new Icons.Regular.Size24.LeafOne())">Disease</FluentNavLink>
+                <FluentNavLink Href="room" Icon="@(new Icons.Regular.Size24.LeafOne())">Room</FluentNavLink>
             </FluentNavGroup>
         </FluentNavMenu>
     }
