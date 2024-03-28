@@ -1,9 +1,4 @@
-﻿using BlazorWasm.HospitalManagementSystem.Models;
-using BlazorWasm.HospitalManagementSystem.Services;
-using Microsoft.AspNetCore.Components;
-using Microsoft.FluentUI.AspNetCore.Components;
-
-namespace BlazorWasm.HospitalManagementSystem.Pages.Disease;
+﻿namespace BlazorWasm.HospitalManagementSystem.Pages.Disease;
 
 public partial class PageDisease : ComponentBase
 {
