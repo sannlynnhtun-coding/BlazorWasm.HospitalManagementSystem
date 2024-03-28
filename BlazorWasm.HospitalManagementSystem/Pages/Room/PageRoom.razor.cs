@@ -1,5 +1,4 @@
 ﻿using BlazorWasm.HospitalManagementSystem.Models;
-using BlazorWasm.HospitalManagementSystem.Pages.Disease;
 using BlazorWasm.HospitalManagementSystem.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
