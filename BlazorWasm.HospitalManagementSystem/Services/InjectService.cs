@@ -1,34 +1,30 @@
-﻿using BlazorWasm.HospitalManagementSystem.Pages.Disease;
-using Microsoft.FluentUI.AspNetCore.Components;
+﻿namespace BlazorWasm.HospitalManagementSystem.Services;
 
-namespace BlazorWasm.HospitalManagementSystem.Services
+public class InjectService
 {
-    public class InjectService
+    private readonly DialogService _dialogService;
+
+    public InjectService(DialogService dialogService)
     {
-        private readonly DialogService _dialogService;
+        _dialogService = dialogService;
+    }
 
-        public InjectService(DialogService dialogService)
+    public async Task<DialogResult> ShowDialogAsync<Dialog>(object item) where Dialog : IDialogContentComponent
+    {
+        var dialog = await _dialogService.ShowDialogAsync<Dialog>(item!, new DialogParameters()
         {
-            _dialogService = dialogService;
-        }
+            PreventDismissOnOverlayClick = true,
+            PreventScroll = true,
+        });
 
-        public async Task<DialogResult> ShowDialogAsync<Dialog>(object item) where Dialog : IDialogContentComponent
-        {
-            var dialog = await _dialogService.ShowDialogAsync<Dialog>(item!, new DialogParameters()
-            {
-                PreventDismissOnOverlayClick = true,
-                PreventScroll = true,
-            });
+        var result = await dialog.Result;
+        return result!;
+    }
 
-            var result = await dialog.Result;
-            return result!;
-        }
-
-        public async Task<DialogResult> ConfirmAsync()
-        {
-            var dialog = await _dialogService.ShowConfirmationAsync("Are you sure want to delete?", "Yes", "No", "Confirm");
-            var result = await dialog.Result;
-            return result!;
-        }
+    public async Task<DialogResult> ConfirmAsync()
+    {
+        var dialog = await _dialogService.ShowConfirmationAsync("Are you sure want to delete?", "Yes", "No", "Confirm");
+        var result = await dialog.Result;
+        return result!;
     }
 }
