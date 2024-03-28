@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Net.Http;
 using System.Text;
-using System.Text.Json.Serialization;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace BlazorWasm.HospitalManagementSystem.Services;
