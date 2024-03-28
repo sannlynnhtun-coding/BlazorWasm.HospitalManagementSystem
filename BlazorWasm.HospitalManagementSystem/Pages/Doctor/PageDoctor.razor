@@ -1,0 +1,26 @@
+﻿@page "/doctor"
+<FluentButton OnClick="Create">
+    New
+</FluentButton>
+@if (Data is not null)
+{
+    <FluentDataGrid Items="@Data">
+        <TemplateColumn>
+            <FluentButton IconStart="@(new Icons.Regular.Size24.Edit().WithColor(Color.Warning))" OnClick="() => Edit(context)">
+                Edit
+            </FluentButton>
+            <FluentButton IconStart="@(new Icons.Regular.Size24.Delete().WithColor(Color.Error))" OnClick="() => Delete(context)">
+                Delete
+            </FluentButton>
+        </TemplateColumn>
+        <TemplateColumn Title="No.">
+            @(Data.Get(context))
+        </TemplateColumn>
+        <PropertyColumn Property="@(p => p.DoctorName)" Title="Doctor Name" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Specialist.Name)" Title="Specialist" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Email)" Title="Email" Sortable="true" />
+        <PropertyColumn Property="@(p => p.MobileNumber)" Title="Phone" Sortable="true" />
+        <PropertyColumn Property="@(p => p.StartDuty)" Title="Start Duty" Sortable="true" />
+        <PropertyColumn Property="@(p => p.EndDuty)" Title="End Duty" Sortable="true" />
+    </FluentDataGrid>
+}
