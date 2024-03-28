@@ -532,3 +532,17 @@ Result
 }
 
 ```
+```
+Item = JsonConvert.DeserializeObject<PatientModel>(""""
+                                {
+                    "id": 0,
+                    "name": "MgChit",
+                    "gender": "M",
+                    "phoneNumber": "09987654321",
+                    "email": "example@gmail.com",
+                    "bloodType": "O",
+                    "birthDate": "2024-03-29T00:56:01.709+06:30",
+                    "address": "MDY"
+                }
+                """")!;
+```

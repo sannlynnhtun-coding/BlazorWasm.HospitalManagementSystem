@@ -70,7 +70,8 @@ public class HttpClientService : IApiService
             HttpContent? content = null;
             if (req is not null)
             {
-                content = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, Application.Json);
+                var json = JsonConvert.SerializeObject(req);
+                content = new StringContent(json, Encoding.UTF8, Application.Json);
             }
             switch (method)
             {

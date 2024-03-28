@@ -4,8 +4,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddFluentUIComponents();
 
-//string backendUrl = "https://hospital-management-system-backend-7fee.vercel.app/api/v1/";
-string backendUrl = "https://hospital-management-system-backend.vercel.app/api/v1/";
+string backendUrl = "https://hospital-management-system-backend-7fee.vercel.app/api/v1/";
+//string backendUrl = "https://hospital-management-system-backend.vercel.app/api/v1/";
 
 builder.Services.AddSingleton<Loading>();
 builder.Services.AddSingleton<DialogService>();
