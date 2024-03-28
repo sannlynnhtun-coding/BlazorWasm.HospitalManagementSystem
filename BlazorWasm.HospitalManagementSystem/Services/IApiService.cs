@@ -1,5 +1,4 @@
-﻿
-namespace BlazorWasm.HospitalManagementSystem.Services
+﻿namespace BlazorWasm.HospitalManagementSystem.Services
 {
     public interface IApiService
     {
