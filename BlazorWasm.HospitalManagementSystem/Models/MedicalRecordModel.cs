@@ -9,7 +9,6 @@ public class MedicalRecordModel
     public string Diagnosis { get; set; }
     public string Note { get; set; }
     public string Treatment { get; set; }
-    public List<DiseaseModel> Diseases { get; set; }
 }
 
 public class MedicalRecordViewModel

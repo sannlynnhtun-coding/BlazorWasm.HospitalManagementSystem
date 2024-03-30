@@ -47,7 +47,9 @@ public partial class PageMedicalRecord : ComponentBase
 
     private MedicalRecordModel Change(object obj)
     {
-        return JsonConvert.DeserializeObject<MedicalRecordModel>(JsonConvert.SerializeObject(obj))!;
+        var result = JsonConvert.DeserializeObject<MedicalRecordModel>(JsonConvert.SerializeObject(obj))!;
+        Console.WriteLine("create => " + JsonConvert.SerializeObject(result));
+        return result;
     }
 
     private async Task Edit(MedicalRecordViewModel medicalRecord)

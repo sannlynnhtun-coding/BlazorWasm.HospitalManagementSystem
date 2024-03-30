@@ -19,7 +19,7 @@
     {
         <FluentTextField @bind-Value="@Content.DoctorName" style="width: 100%;">Name:</FluentTextField>
         <FluentSelect ValueChanged="@(e => Content.SpecialistId = Convert.ToInt32(e))"
-                      Label="Select Specialist"
+                      Label="Select Specialist" Value="@Content.SpecialistId.ToString()"
                       TOption="int" style="width: 100%;">
             <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
             @foreach (var item in DataLst)
@@ -41,7 +41,7 @@
     [CascadingParameter]
     public FluentDialog Dialog { get; set; } = default!;
 
-    private List<DoctorSpecialistModel> DataLst = null;
+    private List<DoctorSpecialistModel>? DataLst = null;
 
     // string? SpecialistId;
 
