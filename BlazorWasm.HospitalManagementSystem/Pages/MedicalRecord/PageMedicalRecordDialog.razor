@@ -1,0 +1,75 @@
+﻿@implements IDialogContentComponent<MedicalRecordViewModel>
+
+<FluentDialogHeader ShowDismiss="true">
+    <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentIcon Value="@(new Icons.Regular.Size24.WindowApps())" />
+        <FluentLabel Typo="Typography.PaneHeader">
+            Patient
+        </FluentLabel>
+    </FluentStack>
+</FluentDialogHeader>
+
+<FluentDialogFooter>
+    <FluentButton Appearance="Appearance.Neutral" OnClick="@CancelAsync">Cancel</FluentButton>
+    <FluentButton Appearance="Appearance.Accent" OnClick="@SaveAsync">Save</FluentButton>
+</FluentDialogFooter>
+
+<FluentDialogBody>
+    <FluentSelect ValueChanged="@(e => Content.PatientId = Convert.ToInt32(e))"
+                  Label="Choose Patient Name"
+                  TOption="int" style="width: 100%;" Value="@Content.PatientId.ToString()">
+        <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
+        @if (Content.Id == 0)
+        {
+            @foreach (var item in Patients)
+            {
+                if (MedicalRecords.Any(x => x.PatientID == item.id)) continue;
+                <FluentOption Value="@(item.id.ToString())">@item.name</FluentOption>
+            }
+        }
+        else
+        {
+            @foreach (var item in Patients)
+            {
+                <FluentOption Value="@(item.id.ToString())">@item.name</FluentOption>
+            }
+        }
+    </FluentSelect>
+    <FluentDatePicker Label="From Date" Value="@StartDate" ValueChanged="@(e => StartDate = e.ToDateTime())" style="width: 100%;" />
+    <FluentDatePicker Label="To Date" Value="@EndDate" ValueChanged="@(e => EndDate = e.ToDateTime())" style="width: 100%;" />
+    <FluentTextField @bind-Value="@Content.Diagnosis" style="width: 100%;">Diagnosis:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Note" style="width: 100%;">Note:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Treatment" style="width: 100%;">Treatment:</FluentTextField>
+</FluentDialogBody>
+
+@code {
+    [Parameter]
+    public MedicalRecordViewModel Content { get; set; } = default!;
+
+    [CascadingParameter]
+    public FluentDialog Dialog { get; set; } = default!;
+
+    private DateTime StartDate = DateTime.Now;
+    private DateTime EndDate = DateTime.Now;
+    private List<PatientModel> Patients = new();
+    private List<MedicalRecordModel> MedicalRecords = new();
+
+    private async Task SaveAsync()
+    {
+        Content.StartDate = StartDate;
+        Content.EndDate = EndDate;
+        Content.Diseases = new List<DiseaseModel>();
+        await Dialog.CloseAsync(Content);
+    }
+
+    private async Task CancelAsync()
+    {
+        await Dialog.CancelAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        MedicalRecords = await ApiService.Execute<List<MedicalRecordModel>>(ApiUrl.MedicalRecord, Method.Get);
+        Patients = await ApiService.Execute<List<PatientModel>>(ApiUrl.Patient, Method.Get);
+    }
+}

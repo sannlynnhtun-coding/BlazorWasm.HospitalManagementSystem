@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
@@ -25,7 +26,9 @@ public class HttpClientService : IApiService
             HttpContent? content = null;
             if (req is not null)
             {
-                content = new StringContent(JsonConvert.SerializeObject(req), Encoding.UTF8, Application.Json);
+                var settings = new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.sssZ" };
+                var json = JsonConvert.SerializeObject(req, settings);
+                content = new StringContent(json, Encoding.UTF8, Application.Json);
             }
             switch (method)
             {
@@ -70,7 +73,8 @@ public class HttpClientService : IApiService
             HttpContent? content = null;
             if (req is not null)
             {
-                var json = JsonConvert.SerializeObject(req);
+                var settings = new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.sssZ" };
+                var json = JsonConvert.SerializeObject(req, settings);
                 content = new StringContent(json, Encoding.UTF8, Application.Json);
             }
             switch (method)

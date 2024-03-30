@@ -9,4 +9,5 @@ public static class ApiUrl
     public static string Doctor { get; } = "doctors";
     public static string DoctorSpecialists { get; } = "doctor-specialists";
     public static string Appointment { get; } = "appointments";
+    public static string MedicalRecord { get; } = "medical-records";
 }
