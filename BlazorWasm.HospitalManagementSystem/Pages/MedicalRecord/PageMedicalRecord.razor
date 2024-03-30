@@ -1,0 +1,31 @@
+﻿@page "/patient/medical-record"
+
+<FluentButton OnClick="Create">
+    New
+</FluentButton>
+@if (Data is not null)
+{
+    <FluentDataGrid Items="@Data">
+        <TemplateColumn>
+            <FluentButton IconStart="@(new Icons.Regular.Size24.Edit().WithColor(Color.Warning))" OnClick="() => Edit(context)">
+            </FluentButton>
+            <FluentButton IconStart="@(new Icons.Regular.Size24.Delete().WithColor(Color.Error))" OnClick="() => Delete(context)">
+            </FluentButton>
+        </TemplateColumn>
+        <TemplateColumn Title="No.">
+            @(Data.Get(context))
+        </TemplateColumn>
+        <TemplateColumn Title="Name" Sortable="true">
+            @Patients.First(y => y.id == context.PatientId).name
+        </TemplateColumn>
+        <TemplateColumn Title="Start Date">
+            @(context.StartDate.ToString("dd-MM-yyyy hh:mm tt"))
+        </TemplateColumn>
+        <TemplateColumn Title="End Date">
+            @(context.EndDate.ToString("dd-MM-yyyy hh:mm tt"))
+        </TemplateColumn>
+        <PropertyColumn Property="@(p => p.Diagnosis)" Title="Diagnosis" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Note)" Title="Note" Sortable="true" />
+        <PropertyColumn Property="@(p => p.Treatment)" Title="Treatment" Sortable="true" />
+    </FluentDataGrid>
+}

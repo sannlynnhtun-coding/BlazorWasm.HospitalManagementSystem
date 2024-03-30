@@ -1,0 +1,66 @@
+﻿@implements IDialogContentComponent<MedicalRecordViewModel>
+
+<FluentDialogHeader ShowDismiss="true">
+    <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentIcon Value="@(new Icons.Regular.Size24.WindowApps())" />
+        <FluentLabel Typo="Typography.PaneHeader">
+            Patient
+        </FluentLabel>
+    </FluentStack>
+</FluentDialogHeader>
+
+<FluentDialogFooter>
+    <FluentButton Appearance="Appearance.Neutral" OnClick="@CancelAsync">Cancel</FluentButton>
+    <FluentButton Appearance="Appearance.Accent" OnClick="@SaveAsync">Save</FluentButton>
+</FluentDialogFooter>
+
+<FluentDialogBody>
+    <FluentSelect ValueChanged="@(e => Content.PatientId = Convert.ToInt32(e))"
+                  Label="Select Patient Name"
+                  TOption="int" style="width: 100%;">
+        <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
+        @foreach (var item in Patients)
+        {
+            <FluentOption Value="@(item.id.ToString())">@item.name</FluentOption>
+        }
+    </FluentSelect>
+    <FluentDatePicker Label="From Date" Value="@FromDate" ValueChanged="@(e => FromDate = e.ToDateTime())" />
+    <FluentTimePicker Value="@FromTime" ValueChanged="@(e => FromTime = e.ToDateTime())" />
+    <FluentDatePicker Label="To Date" Value="@ToDate" ValueChanged="@(e => ToDate = e.ToDateTime())" />
+    <FluentTimePicker Value="@ToTime" ValueChanged="@(e => ToTime = e.ToDateTime())" />
+    <FluentTextField @bind-Value="@Content.Diagnosis" style="width: 100%;">Diagnosis:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Note" style="width: 100%;">Note:</FluentTextField>
+    <FluentTextField @bind-Value="@Content.Treatment" style="width: 100%;">Treatment:</FluentTextField>
+</FluentDialogBody>
+
+@code {
+    [Parameter]
+    public MedicalRecordViewModel Content { get; set; } = default!;
+
+    [CascadingParameter]
+    public FluentDialog Dialog { get; set; } = default!;
+
+    private DateTime FromDate = DateTime.Now;
+    private DateTime ToDate = DateTime.Now;
+    private DateTime FromTime = DateTime.Now;
+    private DateTime ToTime = DateTime.Now;
+    private List<PatientModel> Patients = new();
+
+    private async Task SaveAsync()
+    {
+        Content.StartDate = Convert.ToDateTime(FromDate.ToString("yyyy-MM-dd ") + FromTime.ToString("hh:mm:ss tt"));
+        Content.EndDate = Convert.ToDateTime(ToDate.ToString("yyyy-MM-dd ") + ToTime.ToString("hh:mm:ss tt"));
+        Content.Diseases = new List<DiseaseModel>();
+        await Dialog.CloseAsync(Content);
+    }
+
+    private async Task CancelAsync()
+    {
+        await Dialog.CancelAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Patients = await ApiService.Execute<List<PatientModel>>(ApiUrl.Patient, Method.Get);
+    }
+}
