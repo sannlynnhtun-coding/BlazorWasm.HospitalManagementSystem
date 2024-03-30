@@ -30,7 +30,7 @@ public partial class PageDoctorSpecialistRole
         if (!result.Cancelled && result.Data != null)
         {
             Loading.EnableLoading();
-            await ApiService.Execute(ApiUrl.DoctorSpecialistRoleCreate, Method.Post, result.Data);
+            await ApiService.Execute(ApiUrl.DoctorSpecialistRole, Method.Post, result.Data);
             Item = new();
             await List();
         }
@@ -48,7 +48,7 @@ public partial class PageDoctorSpecialistRole
         if (!result.Cancelled && result.Data != null)
         {
             Loading.EnableLoading();
-            await ApiService.Execute($"{ApiUrl.DoctorSpecialistRoleEdit}/{item.Id}", Method.Put, result.Data);
+            await ApiService.Execute($"{ApiUrl.DoctorSpecialistRole}/{item.Id}", Method.Put, result.Data);
             Item = new();
             await List();
         }
@@ -62,7 +62,7 @@ public partial class PageDoctorSpecialistRole
         if (canceled) return;
 
         Loading.EnableLoading();
-        await ApiService.Execute($"{ApiUrl.DoctorSpecialistRoleDelete}/{item.Id}", Method.Delete);
+        await ApiService.Execute($"{ApiUrl.DoctorSpecialistRole}/{item.Id}", Method.Delete);
         Item = new();
         await List();
     }

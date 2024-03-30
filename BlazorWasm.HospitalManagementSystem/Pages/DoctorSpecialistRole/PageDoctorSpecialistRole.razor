@@ -1,4 +1,4 @@
-﻿@page "/doctor-specialist-role"
+﻿@page "/doctor/specialist"
 
 <FluentButton OnClick="Create">
     New
@@ -8,10 +8,8 @@
     <FluentDataGrid Items="@Data">
         <TemplateColumn>
             <FluentButton IconStart="@(new Icons.Regular.Size24.Edit().WithColor(Color.Warning))" OnClick="() => Edit(context)">
-                Edit
             </FluentButton>
             <FluentButton IconStart="@(new Icons.Regular.Size24.Delete().WithColor(Color.Error))" OnClick="() => Delete(context)">
-                Delete
             </FluentButton>
         </TemplateColumn>
         <TemplateColumn Title="No.">

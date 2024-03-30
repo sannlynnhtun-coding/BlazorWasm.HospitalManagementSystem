@@ -4,14 +4,14 @@
     <FluentStack VerticalAlignment="VerticalAlignment.Center">
         <FluentIcon Value="@(new Icons.Regular.Size24.WindowApps())" />
         <FluentLabel Typo="Typography.PaneHeader">
-            Doctor Specialist Role
+            Patient
         </FluentLabel>
     </FluentStack>
 </FluentDialogHeader>
 
 <FluentDialogFooter>
-    <FluentButton Appearance="Appearance.Accent" OnClick="@SaveAsync">Save</FluentButton>
     <FluentButton Appearance="Appearance.Neutral" OnClick="@CancelAsync">Cancel</FluentButton>
+    <FluentButton Appearance="Appearance.Accent" OnClick="@SaveAsync">Save</FluentButton>
 </FluentDialogFooter>
 
 <FluentDialogBody>
@@ -21,7 +21,7 @@
     <FluentTextField @bind-Value="@Content.email" style="width: 100%;">Email:</FluentTextField>
     <FluentTextField @bind-Value="@Content.bloodType" style="width: 100%;">BloodType:</FluentTextField>
     <FluentTextField @bind-Value="@Content.address" style="width: 100%;">Address:</FluentTextField>
-    <FluentDatePicker AriaLabel="Date Of Birth" @bind-Value="@SelectedDate" DayFormat="DayFormat.TwoDigit"/>
+    <FluentDatePicker Label="Date Of Birth" @bind-Value="@SelectedDate" DayFormat="DayFormat.TwoDigit" style="width: 100%;" />
 </FluentDialogBody>
 
 @code {

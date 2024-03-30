@@ -13,10 +13,8 @@ truncate table public."DoctorSpecialList" CASCADE;
 
 INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Cardiologist', 'Specializes in heart diseases and cardiovascular health.');
 INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Sicpholis', 'blah blah');
-INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Cardiologist', 'Specializes in heart diseases and cardiovascular health.');
 INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Dermatologist', 'Focuses on skin, hair, and nail-related issues.');
 INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Gastroenterologist', 'Deals with the digestive system and its disorders.');
-INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Cardiologist', 'Specializes in heart diseases and cardiovascular health.');
 INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Neurologist', 'Specializes in the nervous system and its disorders.');
 INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Oncologist', 'Focuses on the diagnosis and treatment of cancer.');
 INSERT INTO public."DoctorSpecialList" ("Name", "Description") VALUES ('Orthopedist', 'Specializes in bones, joints, and musculoskeletal system.');
