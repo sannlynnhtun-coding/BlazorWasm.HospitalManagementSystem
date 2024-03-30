@@ -1,0 +1,111 @@
+﻿@implements IDialogContentComponent<AppointmentCreateModel>
+
+<FluentDialogHeader ShowDismiss="true">
+    <FluentStack VerticalAlignment="VerticalAlignment.Center">
+        <FluentIcon Value="@(new Icons.Regular.Size24.WindowApps())" />
+        <FluentLabel Typo="Typography.PaneHeader">
+            Appointment
+        </FluentLabel>
+    </FluentStack>
+</FluentDialogHeader>
+
+<FluentDialogFooter>
+    <FluentButton Appearance="Appearance.Neutral" OnClick="@CancelAsync">Cancel</FluentButton>
+    <FluentButton Appearance="Appearance.Accent" OnClick="@SaveAsync">Save</FluentButton>
+</FluentDialogFooter>
+
+<FluentDialogBody>
+    @if (Doctors is not null && Patients is not null && Rooms is not null)
+    {
+        <FluentSelect ValueChanged="@(e =>Content.PatientId = Convert.ToInt32(e))" Value="@(Content.PatientId.ToString())"
+                      Label="Select Patient"
+                      TOption="int" style="width: 100%;">
+            <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
+            @foreach (var patient in Patients)
+            {
+                <FluentOption Value="@(patient.id.ToString())">@patient.name</FluentOption>
+            }
+        </FluentSelect>
+        <FluentSelect ValueChanged="@(e =>Content.DoctorId = Convert.ToInt32(e))" Value="@(Content.DoctorId.ToString())"
+                      Label="Select Doctor"
+                      TOption="int" style="width: 100%;">
+            <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
+            @foreach (var doctor in Doctors)
+            {
+                <FluentOption Value="@(doctor.Id.ToString())">@doctor.DoctorName</FluentOption>
+            }
+        </FluentSelect>
+        <FluentSelect ValueChanged="@(e =>Content.RoomId = Convert.ToInt32(e))" Value="@(Content.RoomId.ToString())"
+                      Label="Select Room"
+                      TOption="int" style="width: 100%;">
+            <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
+            @foreach (var room in Rooms)
+            {
+                <FluentOption Value="@(room.id.ToString())">@room.name</FluentOption>
+            }
+        </FluentSelect>
+        <FluentSelect Style="width: 100%;" ValueChanged="@(e => Content.Status = e)"
+                      Label="Select Status"
+            TOption="string" Value="@(Content.Status)">
+            <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
+            <FluentOption Value="">-- Select One --</FluentOption>
+            <FluentOption Value="Pending">Pending</FluentOption>
+            <FluentOption Value="Cancelled">Cancel</FluentOption>
+            <FluentOption Value="Completed">Complete</FluentOption>
+        </FluentSelect>
+        <FluentDatePicker Label="Appointment Date" @bind-Value="@Content.AppointmentDate" 
+        DayFormat="DayFormat.TwoDigit" style="width: 100%;" />
+    }
+    @* <FluentTextField @bind-Value="@Content." style="width: 100%;">Name:</FluentTextField> *@
+</FluentDialogBody>
+
+@code {
+    [Parameter]
+    public AppointmentCreateModel Content { get; set; } = default!;
+
+    [CascadingParameter]
+    public FluentDialog Dialog { get; set; } = default!;
+
+    private List<DoctorModel>? Doctors = null;
+    private List<PatientModel>? Patients = null;
+    private List<RoomModel>? Rooms = null;
+    private string? SelectedStatus;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var doctors = ApiService.Execute<List<DoctorModel>>(ApiUrl.Doctor, Method.Get);
+        var patients = ApiService.Execute<List<PatientModel>>(ApiUrl.Patient, Method.Get);
+        var rooms = ApiService.Execute<List<RoomModel>>(ApiUrl.Rooms, Method.Get);
+        await Task.WhenAll(doctors, patients, rooms);
+        Doctors = doctors.Result;
+        Doctors.Insert(0, new DoctorModel
+            {
+                Id = 0,
+                DoctorName = "-- Select One --"
+            });
+        Patients = patients.Result;
+        Patients.Insert(0, new PatientModel
+            {
+                id = 0,
+                name = "-- Select One --"
+            });
+        Rooms = rooms.Result;
+        Rooms.Insert(0, new RoomModel
+            {
+                id = 0,
+                name = "-- Select One --"
+            });
+    }
+
+    private async Task SaveAsync()
+    {
+        // Content.Status = "Pending";
+        Content.IsCancel = Content.Status == "Completed" ? true :false;
+        await Dialog.CloseAsync(Content);
+    }
+
+    private async Task CancelAsync()
+    {
+        await Dialog.CancelAsync();
+    }
+}
