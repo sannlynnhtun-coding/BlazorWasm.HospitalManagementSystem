@@ -1,0 +1,61 @@
+﻿@page "/doctor/list"
+
+@if (Data is not null)
+{
+    @* <FluentStack Orientation="Orientation.Horizontal" Width="500">
+        @foreach (var item in Data)
+        {
+            <FluentCard>
+                <FluentPersona Name="@item.DoctorName"
+                               ImageSize="50px"
+                               Initials="@item.DoctorName.ToInitials()">
+                </FluentPersona>
+            </FluentCard>
+        }
+    </FluentStack> *@
+    <FluentGrid Spacing="3" Justify="@JustifyContent.FlexStart">
+        @foreach (var item in Data)
+        {
+            <FluentGridItem xs="3" sm="3">
+                <FluentCard>
+                    <FluentPersona Name="@GetName(item)"
+                                   @* Style="@GetColor(item)" *@
+                                   ImageSize="50px"
+                                   Status="PresenceStatus.Available"
+                                   Initials="@item.DoctorName.ToInitials()">
+                    </FluentPersona>
+                    @* <FluentDivider Style="width: 100%;" Role="DividerRole.Presentation"></FluentDivider>
+            <FluentLabel Typo="Typography.Subject"> Mobile No - @item.MobileNumber  </FluentLabel>
+            <FluentDivider Style="width: 100%;" Role="DividerRole.Presentation"></FluentDivider>
+            <FluentLabel Typo="Typography.Body"> Time    - @(item.StartDuty + " - " + item.EndDuty) </FluentLabel> *@
+                </FluentCard>
+            </FluentGridItem>
+        }
+    </FluentGrid>
+}
+@code {
+    private List<DoctorModel>? Data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await List();
+    }
+
+    private async Task List()
+    {
+        Loading.EnableLoading();
+        var lst = await ApiService.Execute<List<DoctorModel>>(ApiUrl.Doctor, Method.Get);
+        Data = lst.OrderByDescending(x => x.Id).ToList();
+        Loading.DisableLoading();
+    }
+
+    private string GetName(DoctorModel item)
+    {
+        return item.DoctorName + " (" + (@item.Specialist.Name) + ")";
+    }
+
+    private string GetColor(DoctorModel item)
+    {
+        return $"margin-bottom: 5px; background: " + GetName(item).ToHexColor();
+    }
+}
