@@ -50,8 +50,8 @@
             <FluentIcon Value="@(new Icons.Regular.Size16.Globe())" Color="@Color.Neutral" Slot="indicator" />
             <FluentOption Value="">-- Select One --</FluentOption>
             <FluentOption Value="Pending">Pending</FluentOption>
-            <FluentOption Value="Cancelled">Cancel</FluentOption>
-            <FluentOption Value="Completed">Complete</FluentOption>
+            <FluentOption Value="Cancel">Cancel</FluentOption>
+            <FluentOption Value="Complete">Complete</FluentOption>
         </FluentSelect>
         <FluentDatePicker Label="Appointment Date" @bind-Value="@Content.AppointmentDate" 
         DayFormat="DayFormat.TwoDigit" style="width: 100%;" />
@@ -100,7 +100,7 @@
     private async Task SaveAsync()
     {
         // Content.Status = "Pending";
-        Content.IsCancel = Content.Status == "Completed" ? true :false;
+        Content.IsCancel = Content.Status == "Complete" ? true : false;
         await Dialog.CloseAsync(Content);
     }
 
