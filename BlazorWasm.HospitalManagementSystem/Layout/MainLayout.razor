@@ -4,9 +4,9 @@
 <FluentHeader Height="60">
     <FluentButton Color="Color.Custom" OnClick="() => { Expanded = !Expanded; }" CustomColor="#fff" IconStart="@(new Icons.Regular.Size24.Navigation())">
     </FluentButton>
-    <FluentLabel Typo="Typography.H4" Class="">
+    <FluentButton BackgroundColor="#036ac4" Appearance="Appearance.Stealth" OnClick="GoHome">
         <span style="color:white;margin-left: 15px;">Hospital Management System</span>
-    </FluentLabel>
+    </FluentButton>
     <FluentSpacer />
 </FluentHeader>
 <FluentStack Orientation="Orientation.Horizontal" Width="100%">
@@ -62,6 +62,11 @@
     public void Dispose()
     {
         Loading.OnChange -= StateHasChanged;
+    }
+
+    private void GoHome()
+    {
+        Nav.NavigateTo("");
     }
 }
 
