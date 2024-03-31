@@ -1,9 +1,8 @@
-Icons 
-https://bennymeg.github.io/ngx-fluent-ui/
-https://master--628d031b55e942004ac95df1.chromatic.com/?path=/docs/icons-catalog--page
+Fluent UI
+- [Icons](https://bennymeg.github.io/ngx-fluent-ui/)
+- [Icons2](https://master--628d031b55e942004ac95df1.chromatic.com/?path=/docs/icons-catalog--page)
+- [Dialog](https://www.fluentui-blazor.net/Dialog)
 
-Dialog
-https://www.fluentui-blazor.net/Dialog
 
 ```sql
 
@@ -337,6 +336,10 @@ VALUES
 
 ```
 
+-----------------------------------------------------------
+
+### Doctor
+
 Chatgpt
 Ask
 ```
@@ -416,7 +419,9 @@ VALUES
 ('Dr. Zoe Hall', 'zoehall@example.com', '5556789012', 68, '11:00', '19:00');
 ```
 
-Ask
+-----------------------------------------------------------
+
+### Specialist
 ```
 Cardiologist - Specializes in heart diseases and cardiovascular health.
 Dermatologist - Focuses on skin, hair, and nail-related issues.
@@ -530,8 +535,11 @@ Result
 }
 
 ```
+
+-----------------------------------------------------------
+
 ```csharp
-Item = JsonConvert.DeserializeObject<PatientModel>
+var Item = JsonConvert.DeserializeObject<PatientModel>
 (""""
 {
     "id": 0,
