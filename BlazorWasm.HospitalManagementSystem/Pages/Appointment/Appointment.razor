@@ -21,7 +21,26 @@
         @* <PropertyColumn Property="@(p => p.Patient.Name)" Title="Token No" Sortable="true" /> *@
         <PropertyColumn Property="@(p => p.Doctor.DoctorName)" Title="Doctor Name" Sortable="true" />
         <PropertyColumn Property="@(p => p.Room.Name)" Title="Room Name" Sortable="true" />
-        <PropertyColumn Property="@(p => p.Status)" Title="Status" Sortable="true" />
+        <TemplateColumn Title="Status">
+            @if (context.Status == "Pending")
+            {
+                <FluentButton BackgroundColor="#ffc107" Color="#fff">
+                    @context.Status
+                </FluentButton>
+            }
+            else if (context.Status == "Cancelled")
+            {
+                <FluentButton BackgroundColor="#dc3545" Color="#fff">
+                    @context.Status
+                </FluentButton>
+            }
+            else if (context.Status == "Completed")
+            {
+                <FluentButton BackgroundColor="#198754" Color="#fff">
+                    @context.Status
+                </FluentButton>
+            }
+        </TemplateColumn>
         <PropertyColumn Property="@(p => p.IsCancel)" Title="Is Cancel" Sortable="true" />
     </FluentDataGrid>
 }
